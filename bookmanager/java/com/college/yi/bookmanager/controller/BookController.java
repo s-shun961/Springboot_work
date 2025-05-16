@@ -27,26 +27,27 @@ public class BookController {
 		this.bookService = bookService;
 	}
 
-@GetMapping
-public List<Book> getBooks(){
-	return bookService.getAllBooks();
+	@GetMapping
+	public List<Book> getBooks(){
+		return bookService.getAllBooks();
+	}
+	
+	@PostMapping
+	@ResponseStatus(HttpStatus.CREATED)
+	public Book createBook(@RequestBody Book book) {
+	    return bookService.createBook(book);
+	}
+	
+	@PutMapping("/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	public Book updateBook(@PathVariable int id, @RequestBody Book book) {
+	    return bookService.updateBook(id, book);
 	}
 
-@PostMapping
-@ResponseStatus(HttpStatus.CREATED)
-public Book createBook(@RequestBody Book book) {
-    return bookService.createBook(book);
-}
+	@DeleteMapping("/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void deleteBook(@PathVariable int id) {
+    	bookService.deleteBook(id);
+	}
 
-@PutMapping("/{id}")
-@ResponseStatus(HttpStatus.OK)
-public Book updateBook(@PathVariable int id, @RequestBody Book book) {
-    return bookService.updateBook(id, book);
-}
-
-@DeleteMapping("/{id}")
-@ResponseStatus(HttpStatus.NO_CONTENT)
-public void deleteBook(@PathVariable int id) {
-    bookService.deleteBook(id);
-}
 }

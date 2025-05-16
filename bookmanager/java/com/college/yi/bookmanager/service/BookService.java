@@ -36,7 +36,7 @@ public class BookService {
 			book.setTitle(books.getTitle());
 			book.setAuthor(books.getAuthor());
 			book.setPublisher(books.getPublisher());
-			book.setPublished_date(books.getPublishedDate());
+			book.setPublishedDate(books.getPublishedDate());
 			book.setStock(books.getStock());
 			
 			bookList.add(book);
@@ -51,7 +51,7 @@ public class BookService {
 		entity.setTitle(book.getTitle());
 		entity.setAuthor(book.getAuthor());
 		entity.setPublisher(book.getPublisher());
-		entity.setPublishedDate(book.getPublished_date());
+		entity.setPublishedDate(book.getPublishedDate());
 		entity.setStock(book.getStock());
 		
 		BookEntity save = bookRepository.save(entity);
@@ -68,7 +68,7 @@ public class BookService {
 	        entity.setTitle(book.getTitle());
 	        entity.setAuthor(book.getAuthor());
 	        entity.setPublisher(book.getPublisher());
-	        entity.setPublishedDate(book.getPublished_date());
+	        entity.setPublishedDate(book.getPublishedDate());
 	        entity.setStock(book.getStock());
 
 	        BookEntity update = bookRepository.save(entity);

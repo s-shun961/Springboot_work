@@ -3,6 +3,8 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
+	<meta name="_csrf" th:content="${_csrf.token}" />
+	<meta name="_csrf_header" th:content="${_csrf.headerName}" />
     <title>Book List</title>
     <style>
         table {
@@ -63,8 +65,10 @@
         <p><span sec:authentication="principal.authorities"></span></p>
     </div>
 
-    <script>
+    <script th:inline="javascript">
         const isAdmin = /*[[${#authorization.expression('hasRole("ADMIN")')}]]*/ false;
+		const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+		const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
 
         fetch('/api/books')
             .then(response => response.json())
@@ -108,7 +112,8 @@
             fetch('/api/books', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+					[csrfHeader]: csrfToken
                 },
                 body: JSON.stringify(bookData)
             })
@@ -133,7 +138,8 @@
             fetch(`/api/books/${bookId}`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+					[csrfHeader]: csrfToken
                 },
                 body: JSON.stringify(updatedBookData)
             })
@@ -149,7 +155,10 @@
         function deleteBook(bookId) {
             if (confirm("本当に削除しますか？")) {
                 fetch(`/api/books/${bookId}`, {
-                    method: 'DELETE'
+                    method: 'DELETE',
+					headers: {
+						[csrfHeader]: csrfToken
+					},
                 })
                 .then(() => {
                     alert('書籍が削除されました');

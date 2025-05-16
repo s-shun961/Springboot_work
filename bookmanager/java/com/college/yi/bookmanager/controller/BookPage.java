@@ -27,5 +27,4 @@ public String booksPage(Model model) {
 	// index.htmlを表示
 	return "index";
 	}
-
 }

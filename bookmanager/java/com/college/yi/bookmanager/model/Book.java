@@ -15,7 +15,7 @@ public class Book {
 	private String title;
 	private String author;
 	private String publisher;
-	private LocalDate published_date;
+	private LocalDate publishedDate;
 	private int stock;
 
 }
